@@ -5,11 +5,12 @@ import DeleteUser from '@/components/DeleteUser.vue';
 import HeadingSmall from '@/components/HeadingSmall.vue';
 import InputError from '@/components/InputError.vue';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Input, Select } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
 import { type BreadcrumbItem, type User } from '@/types';
+import Textarea from '@/components/ui/input/Textarea.vue';
 
 interface Props {
     mustVerifyEmail: boolean;
@@ -25,12 +26,20 @@ const breadcrumbItems: BreadcrumbItem[] = [
     },
 ];
 
+const genderOptions = [
+    {name : "Female", value : false},
+    {name : "Male", value : true}
+]
+
 const page = usePage();
 const user = page.props.auth.user as User;
 
 const form = useForm({
     name: user.name,
     email: user.email,
+    address: user.address,
+    tele: user.tele,
+    gender: user.gender,
 });
 
 const submit = () => {
@@ -68,7 +77,45 @@ const submit = () => {
                         />
                         <InputError class="mt-2" :message="form.errors.email" />
                     </div>
-
+                    <div class="grid gap-2">
+                    <Label for="tele">Telephone Number</Label>
+                    <Input
+                        id="tele"
+                        type="text"
+                        required
+                        :tabindex="5"
+                        autocomplete="Telephon"
+                        v-model="form.tele"
+                        placeholder="Telephone Number"
+                    />
+                    <InputError :message="form.errors.tele" />
+                </div>
+                <div class="grid gap-2">
+                    <Label for="gender">Gender</Label>
+                    <Select
+                        id="gender"
+                        required
+                        :options="genderOptions"
+                        :tabindex="6"
+                        autocomplete="Gender"
+                        v-model="form.gender"
+                        placeholder="Gender"
+                    />
+                    <InputError :message="form.errors.gender" />
+                </div>
+                <div class="grid gap-2">
+                    <Label for="address">Address</Label>
+                    <Textarea
+                        id="address"
+                        required
+                        :tabindex="7"
+                        autocomplete="Address"
+                        v-model="form.address"
+                        placeholder="Address"
+                    />
+                    <InputError :message="form.errors.address" />
+                </div>
+                    
                     <div v-if="mustVerifyEmail && !user.email_verified_at">
                         <p class="-mt-4 text-sm text-muted-foreground">
                             Your email address is unverified.

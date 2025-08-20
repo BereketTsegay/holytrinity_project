@@ -2,7 +2,8 @@
 import InputError from '@/components/InputError.vue';
 import TextLink from '@/components/TextLink.vue';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Input, textarea } from '@/components/ui/input';
+import Select from '@/components/ui/input/Select.vue';
 import { Label } from '@/components/ui/label';
 import AuthBase from '@/layouts/AuthLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
@@ -13,7 +14,14 @@ const form = useForm({
     email: '',
     password: '',
     password_confirmation: '',
+    tele: '',
+    address: '',
+    gender: null,
 });
+const GenerOptions = [
+    {name : "Female", value : false},
+    {name : "Male", value : true}
+]
 
 const submit = () => {
     form.post(route('register'), {
@@ -66,6 +74,45 @@ const submit = () => {
                         placeholder="Confirm password"
                     />
                     <InputError :message="form.errors.password_confirmation" />
+                </div>
+                <div class="grid gap-2">
+                    <Label for="tele">Telephone Number</Label>
+                    <Input
+                        id="tele"
+                        type="text"
+                        required
+                        :tabindex="5"
+                        autocomplete="Telephon"
+                        v-model="form.tele"
+                        placeholder="Telephone Number"
+                    />
+                    <InputError :message="form.errors.tele" />
+                </div>
+                <div class="grid gap-2">
+                    <Label for="gender">Gender</Label>
+                    <Select
+                        id="gender"
+                        type="password"
+                        required
+                        :options="GenerOptions"
+                        :tabindex="6"
+                        autocomplete="Gender"
+                        v-model="form.gender"
+                        placeholder="Gender"
+                    />
+                    <InputError :message="form.errors.password_confirmation" />
+                </div>
+                <div class="grid gap-2">
+                    <Label for="address">Address</Label>
+                    <textarea
+                        id="address"
+                        required
+                        :tabindex="7"
+                        autocomplete="Address"
+                        v-model="form.address"
+                        placeholder="Address"
+                    />
+                    <InputError :message="form.errors.address" />
                 </div>
 
                 <Button type="submit" class="mt-2 w-full" tabindex="5" :disabled="form.processing">
