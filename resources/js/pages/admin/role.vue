@@ -6,14 +6,14 @@ import PlaceholderPattern from '../../components/PlaceholderPattern.vue';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Admin Dashboard',
-        href: '/admin/dashboard',
+        title: 'Admin Role',
+        href: '/admin/role',
     },
 ];
 </script>
 
 <template>
-    <Head title="Admin Dashboard" />
+    <Head title="Admin Roles" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4 overflow-x-auto">

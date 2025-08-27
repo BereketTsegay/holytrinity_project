@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -10,6 +12,9 @@ Route::get('/', function () {
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('admin/dashboard',[AdminController::class,'index']);
+Route::get('admin/role',[RoleController::class,'index'])->name('admin.role');
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
