@@ -11,7 +11,7 @@ class RoleController extends Controller
 {
     public function index()  {
         $role = Role::all();
-        return Inertia::render('admin/role',['role'=>$role]);
+        return Inertia::render('admin/roles',['role'=>$role]);
     }
     public function create()  {
         return Inertia::render('admin/role_create');

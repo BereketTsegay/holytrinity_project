@@ -13,8 +13,18 @@ Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('admin/dashboard',[AdminController::class,'index']);
-Route::get('admin/role',[RoleController::class,'index'])->name('admin.role');
+Route::prefix('admin')->group(function(){
+    Route::get('/dashboard',[AdminController::class,'index']);
+    Route::controller(RoleController::class)->group(function () {
+        Route::get('/role/{id}', 'show');
+        Route::get('/roles', 'index')->name('admin.roles');
+        Route::post('/roles', 'store');
+        Route::delete('/roles', 'delete');
+    });
+
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

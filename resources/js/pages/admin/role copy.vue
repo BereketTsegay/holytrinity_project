@@ -7,16 +7,18 @@ import AdminLayout from '@/layouts/AdminLayout.vue';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Admin Dashboard',
-        href: '/admin/dashboard',
+        title: 'Admin Role',
+        href: '/admin/role',
     },
 ];
 </script>
 
 <template>
-    <Head title="Admin Dashboard" />
+    <Head title="Admin Role" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
-        <AdminLayout title="Admin Dashboard"></AdminLayout>
+        <AdminLayout title="Admin Role">
+            Role things goes here
+        </AdminLayout>
     </AppLayout>
 </template>
